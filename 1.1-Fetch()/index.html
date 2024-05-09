@@ -1,0 +1,47 @@
+<!-- index.html -->
+<!DOCTYPE html>                     <!-- Specify the document type to be HTML. -->
+    
+    <head>                          <!-- Declare the head section.-->
+
+        <meta charset="UTF-8"                                                 />      <!-- Declare the character set to be UTF-8. -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"                  />
+        
+        <title> Coding Train: Data/APIs 1 </title>
+    
+    </head>
+
+    <body>
+
+        <h1> Hello crewl world </h1>
+
+        <img src="" id="rainbow" width="512px"  />
+
+        <script>
+
+            console.log('About to fetch a rainbow');
+            
+            CatchRainbow()
+                .then(response =>
+                {
+                    console.log('yay');
+                })
+                .catch(error => 
+                {
+                    console.log('error');
+                    console.error(error);
+                });
+
+            async function CatchRainbow()
+            {
+                const response  = await fetch('rainbow.png');
+                const blob      = await response.blob();
+
+                document.getElementById('rainbow').src = URL.createObjectURL(blob);
+            }
+
+        </script>
+        
+    </body>
+
+</html>

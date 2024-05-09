@@ -1,0 +1,61 @@
+<!-- index.html -->
+<!DOCTYPE html>                     <!-- Specify the document type to be HTML. -->
+    
+    <head>                          <!-- Declare the head section.-->
+
+        <meta charset="UTF-8"                                                 />      <!-- Declare the character set to be UTF-8. -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"                  />
+        
+        <title> Coding Train: Data/APIs 1.1.1 </title>
+    
+    </head>
+
+    <body>
+
+        <h1> Coding Train: Data/APIs 1.1.1 </h1>
+
+        <img src="" id="rainbow1" width="512px"    />
+        <img src="" id="rainbow2" width="256px"    />
+        <img src="" id="rainbow3" width="128px"    />
+
+        <script>
+
+            console.log('About to fetch a rainbow');
+            
+            CatchSky();
+
+            CatchRainbow()
+                .then(response =>
+                {
+                    console.log('yay');
+                })
+                .catch(error => 
+                {
+                    console.log('error');
+                    console.error(error);
+                });
+
+            async function CatchRainbow()
+            {
+                const response  = await fetch('Images/rainbow.png');
+                const blob      = await response.blob();
+
+                document.getElementById('rainbow1').src = URL.createObjectURL(blob);
+                document.getElementById('rainbow2').src = URL.createObjectURL(blob);
+                document.getElementById('rainbow3').src = URL.createObjectURL(blob);
+            }
+
+            async function CatchSky()
+            {
+                const response = await fetch('Images/Sky.jpg')
+                const blob     = await response.blob();
+
+                document.body.style.backgroundImage = "url(" + URL.createObjectURL(blob) + ")";
+            }
+
+        </script>
+        
+    </body>
+
+</html>

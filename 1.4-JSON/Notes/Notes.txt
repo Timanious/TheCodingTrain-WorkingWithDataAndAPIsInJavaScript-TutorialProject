@@ -1,0 +1,130 @@
+Tutorial: The Coding Train (YouTube) - 1.4 JSON - Working With Data & APIs in JavaScript
+https://www.youtube.com/watch?v=uxf0--uiX0I
+
+Introduction: 
+	In this step instead of Graphing data from local file, we are going to Graph data by using a external API (Application 
+	Programming Interface).
+	The term API refers to two applications talking to each other, two computer programs sending information back and forth.
+	If you're the designer of an application and you want other people who are programming stuff to be able to 'talk' to 
+	your application, you can create an interface, a set of conventions or protocol by which other applications can 'talk' 
+	to your application.
+	For instance if you're a news paper and you want other applications to have access to all the news articles over time,
+	or if you're an image database and you want to let other applications have access to images in your database.
+	There can be a lot of peaces to the puzzle of communicating with an API, you might have to authenticate with some kind 
+	of security or you might have a limited number of requests you can make from the API or you might have to provide a 
+	certain amount of parameters to your reguest so you can get the right data back.
+	For the purpose of this project we will start in a really simple place, with the fetch() function and the URL adress
+	of the API.
+	The API used to demonstrate this is from the website WhereTheISS.at, which is an API that gives you back the current
+	location in latitude and longitude of the International Space Station.
+	Besides returning the latitude and longitude the API also gives back a lot of other information like the altitude, 
+	velocity, visibility, what the time is and where the sun is but for now we will just display the latitude and longitude 
+	on a webpage and also plot that point on a map. 
+	To do that we're also going to use the Leaflet.js library which is an open source mapping library where all of the map 
+	images are Creative Commons licensed but you could also look into other mapping libraries like Google Maps of Map Box,
+	and try experimenting with one of those as well.
+
+Main Steps:
+
+
+Steps:
+
+1. Start with a blank HTML file:
+
+	<!-- index.html -->
+	<!DOCTYPE html> <!-- Specify the document type to be HTML. -->
+	<html lang="en">
+		
+		<head> <!-- Declare the head section.-->
+
+			<meta charset="UTF-8"                                                 /> <!-- Declare the character set to be UTF-8. -->
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+			<meta http-equiv="X-UA-Compatible" content="ie=edge"                  />
+			
+			<title> The Coding Train: 1.4 JSON - Working With Data & APIs in JavaScript </title>
+
+		</head>
+		
+		<body>
+			
+			<header>
+				<div style="float: left; width: 128px;">
+					<img src='Images/Rainbow.png' id='Rainbow' width="128px"/>
+				</div>
+			</header>
+			
+			<main>
+				<div style="float: left;">
+					<h2> The Coding Train: 1.4 JSON - Working With Data & APIs in JavaScript </h2>
+					<h3> Fetch JSON from API and map latitude and longitude.</h3>
+				</div>
+			</main>
+
+			<footer>
+
+			</footer>
+
+			<script>
+				
+			</script>
+
+		</body>
+
+	</html>
+
+2. Create a JavaScript Object named position using an object literal with latitude and longitude properties.
+
+	<!-- index.html -->
+	<!DOCTYPE html> <!-- Specify the document type to be HTML. -->
+	<html lang="en">
+
+		<head> <!-- Declare the head section.-->
+
+			<meta charset="UTF-8"                                                 /> <!-- Declare the character set to be UTF-8. -->
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+			<meta http-equiv="X-UA-Compatible" content="ie=edge"                  />
+			
+			<title> The Coding Train: 1.4 JSON - Working With Data & APIs in JavaScript </title>
+
+		</head>
+		
+		<body>
+			
+			<header>
+				<div style="float: left; width: 128px;">
+					<img src='Images/Rainbow.png' id='Rainbow' width="128px"/>
+				</div>
+			</header>
+			
+			<main>
+				<div style="float: left;">
+					<h2> The Coding Train: 1.4 JSON - Working With Data & APIs in JavaScript </h2>
+					<h3> Fetch JSON from API and map latitude and longitude.</h3>
+				</div>
+			</main>
+
+			<footer>
+
+			</footer>
+
+			<script>
+				
+				// Create a JavaScript Object named position using an object literal with latitude and longitude properties
+				let position = 
+				{
+					latitude: -45,
+					longitude: 112
+				};
+				
+				// Console log the position Object using a Template literal.
+				// Be sure to use backticks (`) instead of single (') or double quotes (") like you normally do!
+				console.log(`The Position is: ${ JSON.stringify(position) } `);
+			</script>
+
+		</body>
+		
+	</html>               
+
+3. Go to WhereTheISS.at in your browser and look to the bottom left to find the link to the API. 
+Or go directly to the REST API using this link: https://wheretheiss.at/w/developer
+

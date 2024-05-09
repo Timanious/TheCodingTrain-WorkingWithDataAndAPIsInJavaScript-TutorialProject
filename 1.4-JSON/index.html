@@ -1,0 +1,58 @@
+<!--
+    The Coding Train: 1.4 JSON - Working With Data & APIs in JavaScript
+    https://www.youtube.com/watch?v=uxf0--uiX0I&t=215s
+
+
+-->>
+
+<!-- index.html -->
+<!DOCTYPE html> <!-- Specify the document type to be HTML. -->
+<html lang="en">
+
+    <head> <!-- Declare the head section.-->
+
+        <meta charset="UTF-8"                                                 /> <!-- Declare the character set to be UTF-8. -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"                  />
+        
+        <title> The Coding Train: 1.4 JSON - Working With Data & APIs in JavaScript </title>
+
+    </head>
+    
+    <body>
+        
+        <header>
+            <div style="float: left; width: 128px;">
+                <img src='Images/Rainbow.png' id='Rainbow' width="128px"/>
+            </div>
+        </header>
+        
+        <main>
+            <div style="float: left;">
+                <h2> The Coding Train: 1.4 JSON - Working With Data & APIs in JavaScript </h2>
+                <h3> Fetch JSON from API and map latitude and longitude.</h3>
+            </div>
+        </main>
+
+        <footer>
+
+        </footer>
+
+        <script>
+            
+            // Create a JavaScript Object named position using an object literal with latitude and longitude properties
+            let position = 
+            {
+                latitude:  -45,
+                longitude: 112
+            };
+            
+            // Console log the position Object using a Template literal.
+            // Be sure to use backticks (`) instead of single (') or double quotes (") like you normally do!
+            console.log(`The Position is: ${ JSON.stringify(position) } `);
+            
+        </script>
+
+    </body>
+
+</html>

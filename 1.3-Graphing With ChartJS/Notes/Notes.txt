@@ -1,0 +1,12 @@
+Tutorial: The Coding Train (YouTube) - 1.3 Graphing With Chart.js - Working With Data & APIs in JavaScript
+https://www.youtube.com/watch?v=5-ptp9tRApM&list=PLRqwX-V7Uu6YxDKpFzf_2D84p0cyk4T7X&index=5&t=322s
+
+Subjects: 
+	Graphing data from a dataset into a graph using the Chart.js JavaScript library.
+
+Main Steps:
+
+Steps:
+
+
+    

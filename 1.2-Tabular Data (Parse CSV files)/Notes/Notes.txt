@@ -1,0 +1,56 @@
+Tutorial: The Coding Train (YouTube) - 1.2 Tabular Data - Working With Data & APIs in JavaScript
+https://www.youtube.com/watch?v=RfMkdvN-23o
+
+Subjects: 
+    Parsing CSV (Comma Seperated Values) files.
+    Grab data with the Fetch() function. (https://data.giss.nasa.gov/gistemp/)
+    Load that data onto a webpage into a graph.
+
+Main Steps:
+    1. Load the CSV file.
+    2. Parse the CSV file.
+    3. Graph the data from the CSV file using the Chart.js JavaScript library.
+
+Steps:
+
+    0. Grab the CSV file and store it locally on your computer by going to 
+    https://data.giss.nasa.gov/gistemp/. Scroll down to where it says
+    'Tables of Global and Hemispheric Monthly Means and Zonal Annual Means'
+    and download the last CSV file named 'Zonal annual means 1880 - Present'
+    Store the CSV file in your project folder.
+
+    1. Start with some boiler plate HTML with some links to where the data comes from to make sure you're referencing and crediting properly in your code:
+
+    <!-- index.html -->
+    <!DOCTYPE html>                     <!-- Specify the document type to be HTML. -->
+        
+        <head>                          <!-- Declare the head section.-->
+
+            <meta charset="UTF-8"                                                 />      <!-- Declare the character set to be UTF-8. -->
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <meta http-equiv="X-UA-Compatible" content="ie=edge"                  />
+            
+            <title> The Coding Train: 1.2 Tabular Data - Working With Data & APIs in JavaScript </title>
+        
+        </head>
+
+        <body>
+
+            <h1> The Coding Train: 1.2 Tabular Data - Working With Data & APIs in JavaScript </h1>
+
+            <script>
+                
+                // Data from: https://data.giss.nasa.gov/gistemp/
+                // Mean from: https://earthobservatory.nasa.gov/world-of-change/DecadalTemp
+
+            </script>
+            
+        </body>
+
+    </html>
+
+    3. Look at the CSV file to see all the collumns of data seperated by comma's.
+    To make it easier to debug create a smaller csv test file.
+    Duplicate the CSV file and rename it to Test.csv and remove all of the data except for the top three rows.
+    Once the parsing etcetera is working properly we load the full dataset.
+    

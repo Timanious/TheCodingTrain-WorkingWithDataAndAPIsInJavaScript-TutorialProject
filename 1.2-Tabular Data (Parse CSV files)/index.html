@@ -1,0 +1,141 @@
+<!-- index.html -->
+<!DOCTYPE html>                     <!-- Specify the document type to be HTML. -->
+    
+    <head>                          <!-- Declare the head section.-->
+
+        <meta charset="UTF-8"                                                 />      <!-- Declare the character set to be UTF-8. -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"                  />
+        
+        <title> The Coding Train: 1.2 Tabular Data - Working With Data & APIs in JavaScript </title>
+    
+    </head>
+
+    <body>
+
+        <div style="float: left; width: 128px;">
+            <img src='Images/Rainbow.png' id='Rainbow' width="128px"/>
+        </div>
+
+        <div style="float: left;">
+            <h2> The Coding Train: 1.2 Tabular Data - Working With Data & APIs in JavaScript </h2>
+        </div>
+            
+        <script>
+            
+            // Data from: https://data.giss.nasa.gov/gistemp/
+            // Mean from: https://earthobservatory.nasa.gov/world-of-change/
+            
+            GetTestData();
+
+            async function GetTestData()
+            {
+                // See Fetch API, Response: https://developer.mozilla.org/en-US/docs/Web/API/Response
+                const response = await fetch('DataSets/Test.csv');
+                // There are different data streams that might come in like a blob, json, an array buffer and text.
+                // We do the parsing of the raw text manually so we want to receive it as text using the text() function:
+                const data = await response.text();
+                // Log the data to the console
+                console.log(data);
+
+                // There are a variety of JavaScript libraries that have functions that will parse a CSV for you. D3 which is a
+                // JavaScript library for data visualization, the p5 js library has a loadTable() function which will parse 
+                // the CSV for you, and there are many others. 
+                // This data however is simple enough to parse manually using the String.split() function which can split 
+                // strings up into different elements of an array. 
+                // See String.prototype.split() API: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
+
+                // First let's call split by line break to break the rows of the string up into elements:
+                // const rows = data.split('\n');
+                // console.log(rows);
+                
+                // We don't really need the first row of the array because that information is only important to us to know 
+                // what the data is, but for parsing we don't actually need it.
+                // We can use the Array.prototype.slice() function to 'slice' off a portion of the array by copying only a 
+                // portion of the array from beginning to end.
+                // See Array.prototype.slice() API: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+                const rows = data.split('\n').slice(1);
+                console.log(rows);
+
+                // Next step is splitting the rows into all of the fields. For what we're doing we only need the year which 
+                // is the first field and the difference from the mean temperature globally which is the second field.
+                // We can use a for each loop to itterate through all of the rows.
+
+                // Using the ES 6 JavaScript arrow syntax and the hicher order .forEach(i => {}) function, which allows us to apply 
+                // something to every element in the array, and each element of the array is represented by the row variable:
+                rows.forEach(element => 
+                {
+                    const row  = element.split(','); // Split the row by commas.
+                    console.log(row);
+
+                    const year = row[0];             // Store row[0] which is the year data into a constant.
+                    const temp = row[1];             // Store row[1] which is the mean temperature into a constant.
+                    console.log(year, temp);
+                });
+
+            }
+
+            // Now that we've worked this out we can go and use the full data set by replacing the path to the data file:
+    
+            // GetData();
+
+            // async function GetData()
+            // {
+            //     const response = await fetch('DataSets/ZonAnn.Ts+dSST.csv');
+            //     const data = await response.text();
+            //     console.log(data);
+
+            //     const rows = data.split('\n').slice(1);
+            //     console.log(rows);
+
+            //     rows.forEach(element => 
+            //     {
+            //         const row  = element.split(','); 
+            //         console.log(row);
+
+            //         const year = row[0];             
+            //         const temp = row[1]; 
+            //         console.log(year, temp);
+            //     });
+            // }
+
+            // If there is an undefined all the way at the bottom of the console.log 
+            // then there is probably an extra line at the bottom of the data set csv file. 
+            // Which means that the data set has to be cleaned up a bit, simply remove the 
+            // extra line from the bottom to get rid of the undefined entry.
+
+            // The next step is to do some refactoring to make the GetData function a bit more readable:
+            //
+            
+            GetData();
+            
+            async function GetData()
+            {
+                const response = await fetch('DataSets/ZonAnn.Ts+dSST.csv');
+                const data = await response.text();
+                console.log(data);
+                
+                const table = data.split('\n').slice(1); // The rows variable is a bit confusing and so it is better to call it table because it holds the entire table.
+                console.log(table);
+
+                table.forEach(row =>                 // This is now looking at each row of the table.
+                {
+                    const columns  = row.split(',');     // Here we split up the row into columns.
+                    console.log(columns);
+
+                    const year = columns[0];             
+                    const temp = columns[1]; 
+                    console.log(year, temp);
+                });
+            }
+
+            // Now that we see the data logged in the console we know that we can do something, like add it to a DOM element.
+            // We can present it back to the user/viewer of the webpage in some form.
+            // We can for instance present it in a line chart which we can do with the Chart.js JavaScript library 
+            // which we will do in step 1.3.
+
+        </script>
+
+    </body>
+
+</html>

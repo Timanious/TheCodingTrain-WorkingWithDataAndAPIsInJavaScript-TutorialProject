@@ -1,0 +1,129 @@
+<!-- index.html -->
+<!DOCTYPE html>                     <!-- Specify the document type to be HTML. -->
+    
+    <head>                          <!-- Declare the head section.-->
+
+        <meta charset="UTF-8"                                                 />      <!-- Declare the character set to be UTF-8. -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"                  />
+        
+        <title> The Coding Train: 1.2 Tabular Data - Working With Data & APIs in JavaScript </title>
+
+        <!-- 
+            Import Chart.js from a cdn (Content Delivery Network)
+            using the jsdelivr network. See Chart.js docs: 
+            https://www.chartjs.org/docs/latest/getting-started/installation.html#cdn 
+        -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js">   </script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js">                           </script> -->
+    </head>
+    
+    <body>
+        
+        <div style="float: left; width: 128px;">
+            <img src='Images/Rainbow.png' id='Rainbow' width="128px"/>
+        </div>
+        
+        <div style="float: left;">
+            <h2> The Coding Train: 1.2 Tabular Data - Working With Data & APIs in JavaScript </h2>
+        </div>
+        
+        <div style="width:20pc">
+            <canvas id="ChartCanvas" style="background-color: black;">  </canvas>
+        </div>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+        <script>
+            // Data from: https://data.giss.nasa.gov/gistemp/
+            // Mean from: https://earthobservatory.nasa.gov/world-of-change/
+            
+            // GetTestData();
+            // GetData();
+            // ChartData();
+            // ChartData(GetData());
+            DisplayData();
+
+            async function DisplayData()
+            {  
+                ChartData(await GetData());
+            }
+
+            async function GetTestData()
+            {
+                // See Fetch API, Response: https://developer.mozilla.org/en-US/docs/Web/API/Response
+                const response  = await fetch('DataSets/Test.csv');
+                const data      = await response.text();
+                // console.log(data);
+
+                const rows       = data.split('\n').slice(1);
+                // console.log(rows);
+
+                rows.forEach(element => 
+                {
+                    const row  = element.split(','); // Split the row by commas.
+                    console.log(row);
+
+                    const year = row[0];             // Store row[0] which is the year data into a constant.
+                    const temp = row[1];             // Store row[1] which is the mean temperature into a constant.
+                    console.log(year, temp);
+                });
+            }
+
+            const xLabels   = [];
+            const yValues   = [];
+            
+            async function GetData()
+            {
+                const response  = await fetch('DataSets/ZonAnn.Ts+dSST.csv');
+                const data      = await response.text();
+                // console.log(data);
+                
+                const table = data.split('\n').slice(1); // The rows variable is a bit confusing and so it is better to call it table because it holds the entire table.
+                // console.log(table);
+
+                table.forEach(row =>                 // This is now looking at each row of the table.
+                {
+                    const columns  = row.split(',');     // Here we split up the row into columns.
+                    // console.log(columns);
+
+                    const year = columns[0];             
+                    const temp = columns[1]; 
+                    xLabels.push(year);
+                    yValues.push(temp);
+                    console.log(year, temp);
+                });
+            }
+
+            async function ChartData()
+            {
+                const ctx = document.getElementById('ChartCanvas'); // context
+
+                new Chart(ctx, 
+                {
+                    type: 'bar',
+                    data: 
+                    {
+                        labels: xLabels,
+                        datasets: [
+                            {
+                                label: 'Global Average Temperature',
+                                data: yValues,
+                                borderWidth: 1
+                            }]
+                    },
+                    options: 
+                    {
+                        scales: 
+                        {
+                            y: 
+                            {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+        </script>
+
+    </body>
+
+</html>
